@@ -17,11 +17,11 @@
  * configuration options there instead of here. That way, you won't have to edit
  * the configuration again if you download the new version of `deploy.php`.
  */
-if (file_exists(basename(__FILE__, '.php').'-config.php')) {
-	define('CONFIG_FILE', basename(__FILE__, '.php').'-config.php');
+if (file_exists($_GET['c'] . '-config.php')) {
+	define('CONFIG_FILE', $_GET['c'] . '-config.php');
 	require_once CONFIG_FILE;
 } else {
-	define('CONFIG_FILE', __FILE__);
+	exit();
 }
 
 /**
@@ -167,6 +167,23 @@ if (!defined('EMAIL_ON_ERROR')) define('EMAIL_ON_ERROR', false);
 if (!isset($_GET['sat']) || $_GET['sat'] !== SECRET_ACCESS_TOKEN || SECRET_ACCESS_TOKEN === 'BetterChangeMeNowOrSufferTheConsequences') {
 	header($_SERVER['SERVER_PROTOCOL'] . ' 403 Forbidden', true, 403);
 }
+
+/**
+ * For long running deploys and BitBucket webhooks (10 sec timeout)
+ */
+if (!isset($_GET['verbose'])) {
+    ob_start();
+    echo "ok.";
+    $size = ob_get_length();
+    header("Content-Encoding: none");
+    header("Content-Length: {$size}");
+    header("Connection: close");
+    ob_end_flush();
+    ob_flush();
+    flush();
+}
+
+
 ob_start();
 ?>
 <!DOCTYPE html>
