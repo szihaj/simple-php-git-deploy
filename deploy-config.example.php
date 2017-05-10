@@ -155,5 +155,5 @@ define('EMAIL_ON_ERROR', false);
  *
  * @var callable
  */
-$callback = false;
+$postDeploy = false;
 
