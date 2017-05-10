@@ -394,6 +394,9 @@ Cleaning up temporary files ...
 				, htmlentities(trim($tmp))
 			);
 		}
+                if (is_callable($postDeploy)) {
+                    $postDeploy();
+                }
 		$error = sprintf(
 			'Deployment error on %s using %s!'
 			, $_SERVER['HTTP_HOST']

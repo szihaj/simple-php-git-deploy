@@ -148,3 +148,12 @@ define('COMPOSER_HOME', false);
  *      e.g. 'someone@example.com' or 'someone@example.com, someone-else@example.com, ...'
  */
 define('EMAIL_ON_ERROR', false);
+
+/**
+ * OPTIONAL
+ * Define any post-deploy script.
+ *
+ * @var callable
+ */
+$callback = false;
+
