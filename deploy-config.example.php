@@ -114,6 +114,13 @@ define('VERSION_FILE', TMP_DIR.'VERSION');
 define('TIME_LIMIT', 30);
 
 /**
+ * Do you want to update git submodules?
+ *
+ * @var boolean
+ */
+if (!defined('UPDATE_SUBMODULES')) define('UPDATE_SUBMODULES', false);
+
+/**
  * OPTIONAL
  * Backup the TARGET_DIR into BACKUP_DIR before deployment.
  *

@@ -126,6 +126,13 @@ if (!defined('VERSION_FILE')) define('VERSION_FILE', TMP_DIR.'VERSION');
 if (!defined('TIME_LIMIT')) define('TIME_LIMIT', 30);
 
 /**
+ * Do you want to update git submodules?
+ *
+ * @var boolean
+ */
+if (!defined('UPDATE_SUBMODULES')) define('UPDATE_SUBMODULES', false);
+
+/**
  * OPTIONAL
  * Backup the TARGET_DIR into BACKUP_DIR before deployment.
  *
@@ -294,9 +301,11 @@ if (!is_dir(TMP_DIR)) {
 }
 
 // Update the submodules
-$commands[] = sprintf(
-	'git submodule update --init --recursive'
-);
+if (defined('UPDATE_SUBMODULES') && UPDATE_SUBMODULES === true) {
+	$commands[] = sprintf(
+		'git submodule update --init --recursive'
+	);
+}
 
 // Describe the deployed version
 if (defined('VERSION_FILE') && VERSION_FILE !== '') {
