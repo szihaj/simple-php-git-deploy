@@ -90,7 +90,7 @@ if (!defined('EXCLUDE')) define('EXCLUDE', serialize(array(
  *
  * @var serialized array of strings
  */
-if (!defined('INCLUDE')) define('INCLUDE', serialize(array(
+if (!defined('R_INCLUDE')) define('R_INCLUDE', serialize(array(
 	// ...
 )));
 
@@ -344,7 +344,7 @@ foreach (unserialize(EXCLUDE) as $exc) {
 
 // Compile include parameters
 $include = '';
-foreach (unserialize(INCLUDE) as $inc) {
+foreach (unserialize(R_INCLUDE) as $inc) {
 	$include .= ' --include='.$inc;
 }
 
