@@ -9,7 +9,7 @@
  * That way, you won't have to edit the configuration again if you download the
  * new version of `deploy.php`.
  *
- * @version 1.3.1
+ * @version 1.4.1
  */
 
 /**
@@ -71,6 +71,17 @@ define('EXCLUDE', serialize(array(
 	'.git',
 )));
 
+/**
+ * Files or folders you want to include with rsync, for example, if you want
+ * to omit all folders/files but one from the parent folder.
+ * Use rsync exclude pattern syntax for each element.
+ *
+ * @var serialized array of strings
+ */
+if (!defined('INCLUDE')) define('INCLUDE', serialize(array(
+    // ...
+)));
+    
 /**
  * Temporary directory we'll use to stage the code before the update. If it
  * already exists, script assumes that it contains an already cloned copy of the

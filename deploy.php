@@ -4,7 +4,7 @@
  *
  * Automatically deploy the code using PHP and Git.
  *
- * @version 1.3.1
+ * @version 1.4.1
  * @link    https://github.com/markomarkovic/simple-php-git-deploy/
  */
 
@@ -81,6 +81,17 @@ if (!defined('DELETE_FILES')) define('DELETE_FILES', false);
  */
 if (!defined('EXCLUDE')) define('EXCLUDE', serialize(array(
 	'.git',
+)));
+
+/**
+ * Files or folders you want to include with rsync, for example, if you want
+ * to omit all folders/files but one from the parent folder.
+ * Use rsync exclude pattern syntax for each element.
+ *
+ * @var serialized array of strings
+ */
+if (!defined('INCLUDE')) define('INCLUDE', serialize(array(
+	// ...
 )));
 
 /**
@@ -330,12 +341,20 @@ $exclude = '';
 foreach (unserialize(EXCLUDE) as $exc) {
 	$exclude .= ' --exclude='.$exc;
 }
+
+// Compile include parameters
+$include = '';
+foreach (unserialize(INCLUDE) as $inc) {
+	$include .= ' --include='.$inc;
+}
+
 // Deployment command
 $commands[] = sprintf(
 	'rsync -rltgoDzvO %s %s %s %s'
 	, TMP_DIR
 	, TARGET_DIR
 	, (DELETE_FILES) ? '--delete-after' : ''
+	, $include
 	, $exclude
 );
 
