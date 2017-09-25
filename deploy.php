@@ -348,13 +348,13 @@ if (defined('USE_COMPOSER') && USE_COMPOSER === true) {
 // Compile exclude parameters
 $exclude = '';
 foreach (unserialize(EXCLUDE) as $exc) {
-	$exclude .= ' --exclude='.$exc;
+	$exclude .= ' --exclude="'.$exc.'"';
 }
 
 // Compile include parameters
 $include = '';
 foreach (unserialize(R_INCLUDE) as $inc) {
-	$include .= ' --include='.$inc;
+	$include .= ' --include="'.$inc.'"';
 }
 
 // Deployment command
