@@ -4,7 +4,7 @@
  *
  * Automatically deploy the code using PHP and Git.
  *
- * @version 1.4.1
+ * @version 1.4.2
  * @link    https://github.com/markomarkovic/simple-php-git-deploy/
  */
 
@@ -357,9 +357,12 @@ foreach (unserialize(R_INCLUDE) as $inc) {
 	$include .= ' --include="'.$inc.'"';
 }
 
+if (!isset($deployment_command)) {
+    $deployment_command = 'rsync -rltgoDzvO %s %s %s %s %s';
+}
 // Deployment command
 $commands[] = sprintf(
-	'rsync -rltgoDzvO %s %s %s %s %s'
+    $deployment_command
 	, TMP_DIR
 	, TARGET_DIR
 	, (DELETE_FILES) ? '--delete-after' : ''

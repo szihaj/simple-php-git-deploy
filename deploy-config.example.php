@@ -9,7 +9,7 @@
  * That way, you won't have to edit the configuration again if you download the
  * new version of `deploy.php`.
  *
- * @version 1.4.1
+ * @version 1.4.2
  */
 
 /**
@@ -81,7 +81,7 @@ define('EXCLUDE', serialize(array(
 if (!defined('INCLUDE')) define('INCLUDE', serialize(array(
     // ...
 )));
-    
+
 /**
  * Temporary directory we'll use to stage the code before the update. If it
  * already exists, script assumes that it contains an already cloned copy of the
@@ -175,3 +175,9 @@ define('EMAIL_ON_ERROR', false);
  */
 $postDeploy = false;
 
+/**
+ * Uncomment and edit this if you want a custom rsync command.
+ *
+ * @var string Rsync command string.
+ */
+// $deployment_command = 'rsync -rltgoDzvO %s %s %s %s %s';
