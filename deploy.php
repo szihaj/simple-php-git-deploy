@@ -20,11 +20,12 @@ require realpath(__DIR__ . '/inc') . '/helpers.php';
  * configuration options there instead of here. That way, you won't have to edit
  * the configuration again if you download the new version of `deploy.php`.
  */
-if (file_exists($_GET['c'] . '-config.php')) {
-	define('CONFIG_FILE', 'config/' . $_GET['c'] . '-config.php');
+$configFilePath = "config/{$_GET['c']}-config.php";
+if (file_exists($configFilePath)) {
+	define('CONFIG_FILE', $configFilePath);
 	require_once CONFIG_FILE;
 } else {
-	exit();
+	die("The requested config file `{$_GET['c']}` does not exist.");
 }
 
 /**
