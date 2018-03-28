@@ -107,6 +107,13 @@ define('CLEAN_UP', true);
 define('VERSION_FILE', TMP_DIR.'VERSION');
 
 /**
+ * Output the branch of the deployed code.
+ *
+ * @var string Full path to the file name
+ */
+define('BRANCH_FILE', TMP_DIR.'BRANCH');
+
+/**
  * Time limit for each command.
  *
  * @var int Time in seconds

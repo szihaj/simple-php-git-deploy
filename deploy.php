@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Simple PHP Git deploy script
  *
@@ -10,6 +11,8 @@
 
 // =========================================[ Configuration start ]===
 
+require realpath(__DIR__ . '/inc') . '/helpers.php';
+
 /**
  * It's preferable to configure the script using `deploy-config.php` file.
  *
@@ -18,7 +21,7 @@
  * the configuration again if you download the new version of `deploy.php`.
  */
 if (file_exists($_GET['c'] . '-config.php')) {
-	define('CONFIG_FILE', $_GET['c'] . '-config.php');
+	define('CONFIG_FILE', 'config/' . $_GET['c'] . '-config.php');
 	require_once CONFIG_FILE;
 } else {
 	exit();
@@ -315,6 +318,11 @@ if (defined('VERSION_FILE') && VERSION_FILE !== '') {
 		, TMP_DIR
 		, VERSION_FILE
 	);
+}
+
+// Save which branch we're on
+if (defined('BRANCH_FILE') && BRANCH_FILE !== '') {
+	file_put_contents(BRANCH_FILE, BRANCH);
 }
 
 // Backup the TARGET_DIR
